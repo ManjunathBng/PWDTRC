@@ -37,14 +37,14 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
+        /*     var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        console.log('Received Event: ' + id);*/
     }
 };
 
@@ -56,7 +56,7 @@ app.initialize();
 $(document).ready(function(){
     $(".Digits").click(function(){
         var $el = $(this),
-            x = 400,
+            x = 100,
             originalColor = $el.css("background");
 
         $el.css("background", "#DCDCDC");
@@ -70,7 +70,7 @@ $(document).ready(function(){
 
 /* -------------------------------Angular Js Code----------------------------------------- */
 
-angular.module('PasswordApp', []).controller('MainController', function($scope) {
+angular.module('PasswordApp', ['ngTouch']).controller('MainController', function ($scope) {
 
     $scope.ShowList = function() {
         //For Test
@@ -208,6 +208,7 @@ angular.module('PasswordApp', []).controller('MainController', function($scope) 
     $scope.PIN = '';
     $scope.Login = function(Number) {
         $(".Digits").removeClass("Error");
+
         $scope.PIN += Number;
         if($scope.PIN.length == 4){
             if($scope.PIN == "1234")
