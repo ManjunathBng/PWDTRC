@@ -1,1 +1,3 @@
 ﻿
+var PWD;
+var TempPwd;

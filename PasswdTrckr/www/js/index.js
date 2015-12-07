@@ -53,7 +53,12 @@ app.initialize();
 
 /* -------------------------------Angular Js Code----------------------------------------- */
 
-$(document).ready(function(){
+$(document).ready(function () {
+    debugger
+    if (localStorage.getItem("PasswordSet") === null) {
+        $("#CreatePassword").show();
+    }
+
     $(".Digits").click(function(){
         var $el = $(this),
             x = 100,
@@ -206,12 +211,13 @@ angular.module('PasswordApp', ['ngTouch']).controller('MainController', function
     /*For Login*/
     
     $scope.PIN = '';
-    $scope.Login = function(Number) {
+    $scope.Login = function (Number) {
+        debugger
         $(".Digits").removeClass("Error");
 
         $scope.PIN += Number;
         if($scope.PIN.length == 4){
-            if($scope.PIN == "1234")
+            if($scope.PIN == PWD)
             {
                 $("#ShowMenu").show();
                 $("#Login").hide();   
@@ -224,5 +230,28 @@ angular.module('PasswordApp', ['ngTouch']).controller('MainController', function
         }
     }
 
+    $scope.CreatePwd = function (Number) {
+        
+        PWD += Number;
+        if (PWD.length == 4) {
+            $("#RecheckPassword").show();
+        }
+    }
+
+    $scope.RecheckPwd = function (Number) {
+
+        Temp += Number;
+        if (Temp.length == 4) {
+            if(PWD == Temp)
+            {
+                localStorage.setItem("PasswordSet", PWD);
+                $("#ShowMenu").show();
+            }
+            else {
+                alert("Does Not Match");
+            }
+        }
+    }
+    
     /*End Login*/
 });
